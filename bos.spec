@@ -1,5 +1,5 @@
 %define	name	bos
-%define	version 2.0.1
+%define	version 2.3
 %define rel	1
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
@@ -8,7 +8,7 @@ Name:		%{name}
 Summary:	A real time strategy game
 Version:	%{version} 
 Release:	%{release} 
-Source0:	%{name}_2_0_1.tar.gz
+Source0:	boswars-2.3-src.tar.gz
 # It doesn't provide it's own icon yet
 # Found this on their patch tracker
 Source11:	%{name}-16.png
@@ -18,24 +18,28 @@ URL:		http://bos.seul.org/
 Group:		Games/Strategy
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
-Requires:	stratagus >= 2.2.1
-BuildArch:	noarch
+BuildRequires:	scons X11-devel lua5.0-devel mesagl-devel libogg-devel
+BuildRequires:	SDL-devel bzip2-devel oggvorbis-devel libmikmod-devel
+BuildRequires:	libpng-devel libmng-devel
+BuildRequires:  MesaGLU-devel ImageMagick libtheora-devel
 
 %description
 Invasion - Battle of Survival is a real-time strategy game using
 the Stratagus game engine. 
 
 %prep
-%setup -q -c -T %{name}-%{version} -a 0
-find -name .xvpics | xargs rm -rf
+%setup -q -n boswars-2.3-src
+scons opengl=1 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_gamesdatadir}/bos
-cp -r data.bos/* $RPM_BUILD_ROOT%{_gamesdatadir}/bos/
+mkdir -p $RPM_BUILD_ROOT{%_gamesbindir,%_gamesdatadir/bos}
+install -m755 boswars $RPM_BUILD_ROOT%_gamesbindir
+
+cp -ra campaigns graphics languages maps scripts sounds units video $RPM_BUILD_ROOT%{_gamesdatadir}/bos/
 cat << EOF > ./bos.sh
 #!/bin/sh
-stratagus \$@ -d %{_gamesdatadir}/bos/
+boswars \$@ -d %{_gamesdatadir}/bos/
 EOF
 install -m755 ./bos.sh -D $RPM_BUILD_ROOT%{_gamesbindir}/bos
 
@@ -77,10 +81,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root)
-%doc data.bos/README.txt
+%doc doc/*
 %dir %{_gamesdatadir}/bos/
 %{_gamesdatadir}/bos/*
 %{_gamesbindir}/bos
+%{_gamesbindir}/boswars
 %{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/%{name}.png
