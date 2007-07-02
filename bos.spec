@@ -29,6 +29,8 @@ the Stratagus game engine.
 
 %prep
 %setup -q -n boswars-2.3-src
+
+%build
 scons opengl=1 
 
 %install
