@@ -1,5 +1,5 @@
 %define	name	bos
-%define	version 2.3
+%define	version 2.4
 %define rel	1
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
@@ -18,7 +18,7 @@ URL:		http://bos.seul.org/
 Group:		Games/Strategy
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
-BuildRequires:	scons X11-devel lua5.0-devel mesagl-devel libogg-devel
+BuildRequires:	scons X11-devel lua-devel mesagl-devel libogg-devel
 BuildRequires:	SDL-devel bzip2-devel oggvorbis-devel libmikmod-devel
 BuildRequires:	libpng-devel libmng-devel
 BuildRequires:  MesaGLU-devel ImageMagick libtheora-devel
