@@ -1,6 +1,6 @@
 %define	name	bos
 %define	version 2.4
-%define rel	1
+%define rel	2
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
 
@@ -32,18 +32,28 @@ the Stratagus game engine.
 
 %build
 scons opengl=1 
+cp boswars{,-gl}
+scons -c .
+scons -c build export
+scons opengl=0
 
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT{%_gamesbindir,%_gamesdatadir/bos}
 install -m755 boswars $RPM_BUILD_ROOT%_gamesbindir
+install -m755 boswars-gl $RPM_BUILD_ROOT%_gamesbindir
 
 cp -ra campaigns graphics languages maps scripts sounds units video $RPM_BUILD_ROOT%{_gamesdatadir}/bos/
+cat << EOF > ./bos-gl
+#!/bin/sh
+boswars-gl \$@ -d %{_gamesdatadir}/bos/
+EOF
 cat << EOF > ./bos.sh
 #!/bin/sh
 boswars \$@ -d %{_gamesdatadir}/bos/
 EOF
 install -m755 ./bos.sh -D $RPM_BUILD_ROOT%{_gamesbindir}/bos
+install -m755 ./bos-gl -D $RPM_BUILD_ROOT%{_gamesbindir}/bos-gl
 
 install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
@@ -56,6 +66,18 @@ Encoding=UTF-8
 Name=%{Summary}
 Comment=%{Summary} - a real time strategy game
 Exec=%{_gamesbindir}/bos
+Icon=%{name}
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
+EOF
+cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-gl.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=%{Summary} (OpenGL)
+Comment=%{Summary} - a real time strategy game
+Exec=%{_gamesbindir}/bos-gl
 Icon=%{name}
 Terminal=false
 Type=Application
@@ -78,8 +100,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_gamesdatadir}/bos/
 %{_gamesdatadir}/bos/*
 %{_gamesbindir}/bos
+%{_gamesbindir}/bos-gl
 %{_gamesbindir}/boswars
+%{_gamesbindir}/boswars-gl
 %{_datadir}/applications/mandriva-%{name}.desktop
+%{_datadir}/applications/mandriva-%{name}-gl.desktop
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
