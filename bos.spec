@@ -49,15 +49,6 @@ install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
-# Create a menu item
-mkdir -p %{buildroot}%{_menudir}
-cat << EOF > %{buildroot}%{_menudir}/%{name}
-?package(%name):command="%{_gamesbindir}/bos"\
- icon="%{name}.png" needs="X11" section="More Applications/Games/Strategy"\
- title="%{Summary}" longtitle="%{Summary} - a real time strategy game" \
- xdg="true"
-EOF
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
@@ -88,7 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_gamesdatadir}/bos/*
 %{_gamesbindir}/bos
 %{_gamesbindir}/boswars
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
