@@ -62,7 +62,6 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=%{Summary}
 Comment=%{Summary} - a real time strategy game
 Exec=%{_gamesbindir}/bos
@@ -74,7 +73,6 @@ Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-gl.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=%{Summary} (OpenGL)
 Comment=%{Summary} - a real time strategy game
 Exec=%{_gamesbindir}/bos-gl
