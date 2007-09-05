@@ -8,13 +8,13 @@ Name:		%{name}
 Summary:	A real time strategy game
 Version:	%{version} 
 Release:	%{release} 
-Source0:	boswars-%{version}-src.tar.gz
+Source0:	http://www.boswars.org/dist/releases/boswars-%{version}-src.tar.gz
 # It doesn't provide it's own icon yet
 # Found this on their patch tracker
 Source11:	%{name}-16.png
 Source12:	%{name}-32.png
 Source13:	%{name}-48.png
-URL:		http://bos.seul.org/
+URL:		http://www.boswars.org/
 Group:		Games/Strategy
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
@@ -106,5 +106,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-
-
