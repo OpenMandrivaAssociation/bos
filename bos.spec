@@ -1,6 +1,6 @@
 %define	name	bos
-%define	version 2.4
-%define rel	2
+%define	version 2.4.1
+%define rel	1
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
 
@@ -62,25 +62,25 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Name=%{Summary}
-Comment=%{Summary} - a real time strategy game
+Name=Bos Wars
+Comment=Invasion: Battle of survival - a real time strategy game
 Exec=%{_gamesbindir}/bos
 Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
+Categories=Game;StrategyGame;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-gl.desktop << EOF
 [Desktop Entry]
-Name=%{Summary} (OpenGL)
-Comment=%{Summary} - a real time strategy game
+Name=Bos Wars (OpenGL)
+Comment=Invasion: Battle of survival - a real time strategy game
 Exec=%{_gamesbindir}/bos-gl
 Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
+Categories=Game;StrategyGame;
 EOF
 
 %clean
