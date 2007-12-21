@@ -16,6 +16,7 @@ Source12:	%{name}-32.png
 Source13:	%{name}-48.png
 URL:		http://www.boswars.org/
 Group:		Games/Strategy
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
 BuildRequires:	scons X11-devel lua-devel mesagl-devel libogg-devel
 BuildRequires:	SDL-devel bzip2-devel oggvorbis-devel libmikmod-devel
