@@ -21,7 +21,7 @@ License:	GPL
 BuildRequires:	scons X11-devel lua-devel mesagl-devel libogg-devel
 BuildRequires:	SDL-devel bzip2-devel oggvorbis-devel libmikmod-devel
 BuildRequires:	libpng-devel libmng-devel
-BuildRequires:  MesaGLU-devel ImageMagick libtheora-devel
+BuildRequires:  MesaGLU-devel imagemagick libtheora-devel
 
 %description
 Invasion - Battle of Survival is a real-time strategy game using
