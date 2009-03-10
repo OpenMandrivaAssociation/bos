@@ -1,6 +1,6 @@
 %define	name	bos
-%define	version 2.4.1
-%define rel	2
+%define	version 2.5
+%define rel	1
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
 
@@ -14,10 +14,11 @@ Source0:	http://www.boswars.org/dist/releases/boswars-%{version}-src.tar.gz
 Source11:	%{name}-16.png
 Source12:	%{name}-32.png
 Source13:	%{name}-48.png
+Patch0: 	boswars-2.5-gcc43.patch
 URL:		http://www.boswars.org/
 Group:		Games/Strategy
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-License:	GPL
+License:	GPLv2+
 BuildRequires:	scons X11-devel lua-devel mesagl-devel libogg-devel
 BuildRequires:	SDL-devel bzip2-devel oggvorbis-devel libmikmod-devel
 BuildRequires:	libpng-devel libmng-devel
@@ -29,28 +30,29 @@ the Stratagus game engine.
 
 %prep
 %setup -q -n boswars-%{version}-src
+%patch0 -p0
 
 %build
 scons opengl=1 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT{%_gamesbindir,%_gamesdatadir/bos}
-install -m755 boswars $RPM_BUILD_ROOT%_gamesbindir
+rm -rf %{buildroot}
+mkdir -p %{buildroot}{%_gamesbindir,%_gamesdatadir/bos}
+install -m755 boswars %{buildroot}%_gamesbindir
 
-cp -ra campaigns graphics languages maps scripts sounds units video $RPM_BUILD_ROOT%{_gamesdatadir}/bos/
+cp -ra campaigns graphics intro languages maps scripts sounds units %{buildroot}%{_gamesdatadir}/bos/
 cat << EOF > ./bos.sh
 #!/bin/sh
 boswars \$@ -d %{_gamesdatadir}/bos/
 EOF
-install -m755 ./bos.sh -D $RPM_BUILD_ROOT%{_gamesbindir}/bos
+install -m755 ./bos.sh -D %{buildroot}%{_gamesbindir}/bos
 
 install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Bos Wars
 Comment=Invasion: Battle of survival - a real time strategy game
@@ -63,7 +65,7 @@ Categories=Game;StrategyGame;
 EOF
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post
