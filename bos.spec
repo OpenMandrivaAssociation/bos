@@ -1,6 +1,6 @@
 %define	name	bos
 %define	version 2.5
-%define rel	1
+%define rel	2
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
 
