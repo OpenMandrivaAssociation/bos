@@ -30,10 +30,10 @@ the Stratagus game engine.
 
 %prep
 %setup -q -n boswars-%{version}-src
-%patch0 -p0
+%patch0 -p0 -b .gcc
 
 %build
-scons opengl=1 
+scons opengl=1
 
 %install
 rm -rf %{buildroot}
