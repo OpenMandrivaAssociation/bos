@@ -1,6 +1,6 @@
 %define	name	bos
-%define	version 2.5
-%define rel	3
+%define	version 2.6.1
+%define rel	1
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
 
@@ -30,7 +30,7 @@ the Stratagus game engine.
 
 %prep
 %setup -q -n boswars-%{version}-src
-%patch0 -p0 -b .gcc
+# %patch0 -p0 -b .gcc
 
 %build
 scons opengl=1
