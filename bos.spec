@@ -8,7 +8,7 @@ Name:		%{name}
 Summary:	A real time strategy game
 Version:	%{version} 
 Release:	%{release} 
-Source0:	http://www.boswars.org/dist/releases/boswars-%{version}-src.tar.gz
+Source0:	http://www.boswars.org/dist/releases/boswars-%{version}-src.zip
 # It doesn't provide it's own icon yet
 # Found this on their patch tracker
 Source11:	%{name}-16.png
