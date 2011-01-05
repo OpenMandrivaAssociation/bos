@@ -1,6 +1,6 @@
 %define	name	bos
 %define	version 2.6.1
-%define rel	1
+%define rel	2
 %define	release	%mkrel %rel
 %define	Summary	Invasion: Battle of survival
 
@@ -15,14 +15,22 @@ Source11:	%{name}-16.png
 Source12:	%{name}-32.png
 Source13:	%{name}-48.png
 Patch0: 	boswars-2.5-gcc43.patch
+Patch1:		boswars-2.6.1-scons-blows.patch
 URL:		http://www.boswars.org/
 Group:		Games/Strategy
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPLv2+
-BuildRequires:	scons X11-devel lua-devel mesagl-devel libogg-devel
-BuildRequires:	SDL-devel bzip2-devel oggvorbis-devel libmikmod-devel
-BuildRequires:	libpng-devel libmng-devel
-BuildRequires:  MesaGLU-devel imagemagick libtheora-devel
+BuildRequires:	scons
+BuildRequires:	libx11-devel
+BuildRequires:	mesagl-devel
+BuildRequires:	SDL-devel
+BuildRequires:	lua-devel
+BuildRequires:	libogg-devel
+BuildRequires:	oggvorbis-devel
+BuildRequires:	png-devel
+BuildRequires:	libtheora-devel
+BuildRequires:	zlib-devel
+BuildRequires:	imagemagick
 
 %description
 Invasion - Battle of Survival is a real-time strategy game using
@@ -30,9 +38,11 @@ the Stratagus game engine.
 
 %prep
 %setup -q -n boswars-%{version}-src
+%patch1 -p0 
 # %patch0 -p0 -b .gcc
 
 %build
+%setup_compile_flags
 scons opengl=1
 
 %install
