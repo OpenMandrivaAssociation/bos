@@ -15,7 +15,7 @@ Source11:	%{name}-16.png
 Source12:	%{name}-32.png
 Source13:	%{name}-48.png
 Patch:		boswars-2.6.1-scons-blows.patch
-URL:		http://www.boswars.org/
+URL:		https://www.boswars.org/
 Group:		Games/Strategy
 License:	GPLv2+
 BuildRequires:	scons
